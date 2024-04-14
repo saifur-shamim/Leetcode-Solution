@@ -90,113 +90,58 @@ const ll infll=900000000000000000;
 
 
 
-int main()
-{
-
-    faster;
-
-
-    /*
-    #ifndef ONLINE_JUDGE
-       freopen("input.txt","r",stdin);
-       freopen("output.txt","w",stdout);
-    #endif
-    */
-
-/// Patience, persistence, and perspiration make an unbeatable combination for success.
-/// The formula for success: rise early, work hard, strike oil.
-/// Winners are not afraid of losing. But losers are. Failure is part of the process of success. People who avoid failure also avoid success.
-
-
-    vector<vector<int>> points;
-    int w;
-
-    int n;
-
-    cin>>n;
-
-    vi ans(n,-1);
-    for(int i=0; i<n; i++)
-    {
-        int x,y;
-
-        cin>>x>>y;
-
-        points.pb({x,y});
-        // points[i].pb(y);
-    }
-
-    cin>>w;
-
-    sort(all(points));
-
-
-    int cnt=0;
+class Solution {
+public:
+    int minRectanglesToCoverPoints(vector<vector<int>>& points, int w) {
+        
+     int cnt=0;
 
     int len=sz(points);
 
     int last=-1;
 
-
+    sort(all(points));
     if(w==0)
     {
         cnt=1;
-
-        for(int i=1; i<len; i++)
+        
+        for(int i=1;i<len;i++)
         {
-
+            
             if(points[i][0]==points[i-1][0])
-            {
-                continue;
-            }
+            {continue;}
             else
             {
                 cnt++;
             }
         }
     }
-    else
+        
+    else{
+        
+    for(int i=0;i<len;i++)
     {
 
-        for(int i=0; i<len; i++)
+        if(last==-1)
         {
-
-            if(last==-1)
-            {
-                last=points[i][0];
-                cnt++;
-            }
-            else if(last+w>=points[i][0])
-            {
-                continue;
-            }
-            else
-            {
-                last=points[i][0];
-                cnt++;
-
-            }
+            last=points[i][0];
+            cnt++;
+        }
+        else if((last+w)>=points[i][0])
+        {
+            continue;
+        }
+        else
+        {
+             last=points[i][0];
+             cnt++;
 
         }
-
+ 
+    }
+        
     }
 
-   cout<<cnt;nl;
-
-
-    return 0;
-}
-
-/*
-
-7
-0 0
-1 1
-2 2
-3 3
-4 4
-5 5
-6 6
-2
-
-*/
+    return cnt;
+    }
+};
